@@ -14,5 +14,9 @@
   "bugs": {
     "url": "https://github.com/QTGate/CoNET-Extension/issues"
   },
-  "homepage": "https://www.CoNET.com"
+  "homepage": "https://www.CoNET.com",
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "semantic-ui": "^2.4.2"
+  }
 }
