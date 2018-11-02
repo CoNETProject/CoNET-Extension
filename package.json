@@ -1,0 +1,18 @@
+{
+  "name": "conet",
+  "version": "0.0.1",
+  "license": "MIT",
+  "description": "CoNET platform cross-browser extension",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QTGate/CoNET-Extension.git"
+  },
+  "author": {
+    "name": "CoNET Technology Inc.",
+    "email": "info@CoNETTech.ca"
+  },
+  "bugs": {
+    "url": "https://github.com/QTGate/CoNET-Extension/issues"
+  },
+  "homepage": "https://www.CoNET.com"
+}
