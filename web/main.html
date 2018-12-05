@@ -1,0 +1,210 @@
+<!doctype html>
+<html>
+    <head>
+        <title>
+            CoNET platform
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+        <meta name="author" content="CoNET Technology Inc.|CoNET技術株式会社|CoNET技術有限公司">
+        <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/; script-src 'self' 'unsafe-inline' 'unsafe-eval'; font-src 'self' data: https://fonts.gstatic.com">
+        <link rel="stylesheet" type="text/css" href="css/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="css/animate.min.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
+    <body>
+        <div class="content" id="body">
+            <!--
+                Language manu area
+            -->
+            
+            <div id="languageArea">
+                <div class="ui text shape languageText" data-bind=" click: selectItem ">
+                    <div class="sides">
+                        <span class="ui header side en languageItem languageTextCoverColor">
+                            <i class="flag united kingdom"></i>
+                            <span class="languageItemSpan" data-bind=" text: menu[ 'en' ][0].showName "></span>
+                        </span>
+                        <span class="ui header side tw languageItem languageTextCoverColor">
+                            <i class="flag taiwan"></i>
+                            <span class="languageItemSpan" data-bind=" text: menu[ 'tw' ][0].showName "></span>
+                        </span>
+                        <span class="ui header side zh languageItem languageTextCoverColor">
+                            <i class="flag china"></i>
+                            <span class="languageItemSpan" data-bind=" text: menu[ 'zh' ][0].showName "></span>
+                        </span>
+                        <span class="ui header side ja languageItem languageTextCoverColor">
+                            <i class="flag japan"></i>
+                            <span class="languageItemSpan" data-bind=" text: menu[ 'ja' ][0].showName "></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ko if: showIconBar -->
+            <section id="iconBar" data-bind = " visible: showIconBar" style = " position: absolute;top: 1.2em; margin-left: 15em;z-index: 999;">
+                <div class="content" style="position: relative;">
+                    <span>
+                        <i class="icon cogs inverted large iconButton" style = "margin-left: 1em;" data-bind = "click: showKeyInfoClick "></i>
+                    </span>
+                </div>
+            </section>
+            <!-- /ko -->
+
+            <!--
+                    CoNET core
+            -->
+            <!--  Keypair section -->
+
+            <!-- ko if: KeyPairFormClass -->
+            <!-- ko with: KeyPairFormClass -->
+            <section class="CoContent showKeyPairForm content">
+                <div class="ui cards loginCards">
+                    <div class="card centered raised" style = "width: 100%;padding: 2em;" data-bind="visible: showKeyPairForm">
+                        <div class="keyPairGenerateForm" >
+                            <div class="ui segment teal" >
+                                <span data-bind = "html: infoDefine [ $root.languageIndex() ].home_index_view.inputEmail" style = "color: rgba(200,150,30,0.9)">
+
+                                </span>
+                                
+                            </div>
+                            <form class="ui form" data-bind="submit: form_AdministratorEmail_submit">
+                                <div class="field required" data-bind="css: { error: EmailAddressError() }">
+                                    <div class="ui huge left icon input focus">
+                                        <i class="icon spy"></i>
+                                        <input class="" type = "email", z-index = "1", data-bind = "value : SystemAdministratorEmailAddress, attr: { placeholder: infoDefine [ $root.languageIndex() ].home_index_view.emailAddress, 'data-content' : EmailAddressError() ? infoDefine[ $root.languageIndex() ].error_message.EmailAddress[0] : null }, css: { 'activating element inline': EmailAddressError() }" >
+                                    </div>
+                                    <div class="ui info message" data-bind = " visible: showInsideFireWallEmail()">
+                                        <i class="icon close" data-bind=" click: function () { showInsideFireWallEmail(false);}"></i>
+                                        <span class="errorInformationText" data-bind = " text: infoDefine [ $root.languageIndex() ].home_index_view.accountEmailInfo "></span>
+                                    </div>
+                                </div>
+                                <div class="field required" data-bind = " css: { error: NickNameError ()}">
+                                    <div class="ui huge left icon input focus">
+                                        <i class="icon student"></i>
+                                        <input type = "text", z-index = "2", data-bind = "value : SystemAdministratorNickName, attr: { 'data-content' : NickNameError() ? infoDefine[ $root.languageIndex() ].error_message.required : null , placeholder: infoDefine [ $root.languageIndex() ].home_index_view.SystemAdministratorNickName }, css: { 'activating element inline': NickNameError() }" >
+                                    </div>
+                                </div>
+                                <div class="field required" data-bind = " css: { error: passwordError ()}">
+                                    <div class="ui huge left icon input focus">
+                                        <i class="icon privacy"></i>
+                                        <input type = "password" z-index = "3" data-bind = " value: systemSetup_systemPassword, attr: { placeholder: infoDefine[ $root.languageIndex() ].Home_keyPairInfo_view.password, 'data-content' : passwordError() ? infoDefine[ $root.languageIndex() ].error_message.PasswordLengthError : null }, css: { 'activating element inline': passwordError() }">
+                                    </div>
+                                </div>
+                                <button class="ui green basic large button" type="submit" data-bind = " text: infoDefine [ $root.languageIndex() ].home_index_view.creatKeyPair, click: form_AdministratorEmail_submit ">
+
+                                </button>
+                            </form>
+                            
+                        </div>
+                    </div>
+                    <div class="card centered raised ui segment" data-bind = "if: showKeyPairPorcess, visible: showKeyPairPorcess" style = "width: 100%;padding: 2em;">
+                        <div class="detail">
+                            <span data-bind = " html: infoDefine [ $root.languageIndex() ].home_index_view.GenerateKeypair "></span>
+                            
+                        </div>
+                        <div class="keyPairProcessBar ui bottom yellow attached progress" style="margin-bottom: 1em;" data-value="1" data-total="100">
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+                </div>
+                    
+            </section>
+            <!-- /ko -->
+            <!-- /ko -->
+
+            <!-- ko if: imapSetup -->
+            <section class="CoContent content">
+                <div class="ui cards loginCards">
+                    <div class="card centered raised" style=" width: 100%;">
+                        <div class="content imapSetupForm">
+                            <div class="ui segment teal">
+                                <p data-bind="html: infoDefine [ $root.languageIndex() ].imapInformation.infomation "></p>
+                                <p data-bind="html: infoDefine[ $root.languageIndex() ].imapInformation.tempImapAccount"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /ko -->
+
+
+            <!--
+                Welcome view
+            -->
+            <section data-bind="if: sectionWelcome">
+                <div class="welcome-bg" style="color: white;">
+                    <div class="welcome">
+                        <h1 class="welcomeTextShadow" data-bind = " text: infoDefine [ languageIndex() ].cover.firstTitle1, animate:{ animation: ['slideInUp','slideOutUp'], state: languageIndex() + 1, delay: 0 }">
+
+                        </h1>
+                        <h1 class="welcomeTextShadow" data-bind = " text: infoDefine [ languageIndex() ].cover.firstTitle2, animate: { animation: ['slideInUp','slideOutUp'], state: languageIndex() + 1, delay: 70 }">
+
+                        </h1>
+                        <div class="ui primary basic button" data-bind="text: infoDefine [ languageIndex() ].cover.start, click: openClick" style="margin-top: 2em;">
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!--
+                agreement
+            
+            -->
+
+            <!-- ko if: showAgreement -->
+            <section id="agreement" >
+                <div class = "content firstNodeContent">
+                    <div class="ui header" data-bind = " text: infoDefine[ languageIndex() ].firstNote.title " ></div>
+                    <div class="ui divider"></div>
+                    <div class="ui attached segment" style="font-weight: bold;" data-bind=" html: infoDefine[ languageIndex() ].firstNote.firstPart "></div>
+                    <!-- ko  foreach: infoDefine[ languageIndex() ].firstNote.detail  -->
+                    <div class="ui top attached header"  data-bind=" visible: header && header.length ">
+                        <h4 data-bind=" text: header "></h4>
+                    </div>
+                    <div class="ui attached segment">
+                        <span data-bind=" html: detail "></span>
+                    </div>
+                    <!-- /ko -->
+                    <div class="agreementButtom">
+                        <div class="ui buttons nextButtom">
+                            <buttom class="ui button" data-bind=" text: infoDefine[ languageIndex() ].firstNote.disagree, click: function () { sectionAgreement(false)}"></buttom>
+                            <div class="or"></div>
+                            <buttom class="ui positive button" data-bind=" text: infoDefine[ languageIndex() ].home_index_view.agree, click: function () { sectionAgreement(true) }"></buttom>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /ko -->
+            
+
+            <!--
+                    Startup view
+            -->
+            <div class="startupView" style="width:100%; height:100%" data-bind="if: sectionWelcome">
+                <video class="videoBackground" autoplay loop>
+                    <source src="images/startup_background.mp4" type="video/mp4">
+                </video>
+            </div>
+            <!--
+                Unsupport Error Message
+            -->
+            <div class="ui basic modal system_error">
+                <div class="header" data-bind=" text: infoDefine[languageIndex()].error_message.errorNotifyTitle">
+                </div>
+            </div>
+        </div>
+        <script src="js/lib/jquery.min.js"></script>
+        <script src="js/lib/jquery.cookie.js"></script>
+        <script src="js/lib/knockout.min.js"></script>
+        <script src="js/lib/knockout.animate.js"></script>
+        <script src="js/lib/semantic.min.js"></script>
+        <script src="js/tools/uiClass.js"></script>
+        <script src="js/tools/storageClass.js"></script>
+        <script src="js/tools/keyPairGenerateForm.js"></script>
+        <script src="js/tools/siteShare.js"></script>
+        <script src="js/tools/languageSelect.js"></script>
+        <script src="js/tools/home.js"></script>
+    </body>
+</html>

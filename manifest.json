@@ -1,0 +1,35 @@
+{
+    "author": "CoNET project",
+    "applications": {
+        "gecko": {
+            "id": "info@CoNETTech.ca"
+        }
+    },
+    "description": "CoNET cross-browser extension client",
+    "manifest_version": 2,
+    "name": "CoNET",
+    "version": "0.0.1",
+    "homepage_url": "https://www.CoNETTech.ca",
+    "icons": {
+        "48": "icons/48x48.png",
+        "96": "icons/96x96.png"
+    },
+    "background":{
+        "scripts": [
+            "web/js/background/openpgp.min.js",
+            "web/js/tools/account.js",
+            "web/js/background/main.js"
+            
+        ]
+    },
+    "browser_action": {
+        "default_area": "navbar",
+        "default_icon": "icons/48x48.png"
+    },
+    "permissions": [
+        "tabs",
+        "storage",
+        "unlimitedStorage"
+    ],
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';"
+}

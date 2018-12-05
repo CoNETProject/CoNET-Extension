@@ -1,6 +1,6 @@
 {
   "name": "conet",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "description": "CoNET platform cross-browser extension",
   "repository": {
@@ -15,8 +15,12 @@
     "url": "https://github.com/QTGate/CoNET-Extension/issues"
   },
   "homepage": "https://www.CoNET.com",
-  "dependencies": {
-    "jquery": "^3.3.1",
-    "semantic-ui": "^2.4.2"
-  }
+  "devDependencies": {
+    "@types/chrome": "^0.0.75",
+    "@types/jquery": "^3.3.22",
+    "@types/jquery.cookie": "^1.4.31",
+    "@types/knockout": "^3.4.60",
+    "openpgp": "^4.2.1"
+  },
+  "dependencies": {}
 }
