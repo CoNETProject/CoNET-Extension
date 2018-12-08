@@ -35,7 +35,8 @@ class view extends languageSelect {
     afterGenerateKey() {
         return this.getConnetImap(imap => {
             if (!imap) {
-                // this.imapSetup ( new imapForm ())
+                this.imapSetup(new imapForm(this.userAccount().email, null, resultImapData => {
+                }));
             }
         });
     }
@@ -44,6 +45,7 @@ class view extends languageSelect {
             if (!_keypair) {
                 return this.KeyPairFormClass(new keyPairGenerateForm(exit => {
                     this.KeyPairFormClass(null);
+                    this.userAccount(exit);
                     return this.afterGenerateKey();
                 }));
             }

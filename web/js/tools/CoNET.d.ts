@@ -124,16 +124,16 @@ interface imapConnect {
     imapIgnoreCertificate: boolean
 }
 
-interface keypair {
+interface keyPair {
 	publicKey?: string
 	privateKey?: string
-	keyLength: number
-	nikeName: string
-	createDate: string
-	email: string
-	passwordOK: boolean
-    verified: boolean
-    publicKeyID: string
+	keyLength?: number
+	nikeName?: string
+	createDate?: string
+	email?: string
+	passwordOK?: boolean
+    verified?: boolean
+    publicKeyID?: string
     showLoginPasswordField?: KnockoutObservable < boolean >
     delete_btn_view?: KnockoutObservable < boolean >
     delete_btn_click?: () => void
@@ -151,11 +151,6 @@ interface INewKeyPair {
     email: string
     nikeName: string
     password: string
-}
-
-interface keyPair {
-    publicKey: string;
-    privateKey: string;
 }
 
 interface imapData {
@@ -620,7 +615,7 @@ interface install_config {
     newVersionCheckFault?: boolean
     newVersionDownloadFault?: number
     newVerReady?: boolean
-    keypair: keypair
+    keypair: keyPair
     iterations: number
     salt?: ArrayBuffer
     keylen?: number

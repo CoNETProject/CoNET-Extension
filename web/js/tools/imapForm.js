@@ -115,8 +115,9 @@ class CoNETConnect {
         //return socketIo.emit11 ( 'tryConnectCoNET' )
     }
 }
-class imapForm {
+class imapForm extends storageClass {
     constructor(account, imapData, exit) {
+        super();
         this.account = account;
         this.exit = exit;
         this.emailAddress = ko.observable('');
@@ -180,6 +181,18 @@ class imapForm {
             removeAllListen();
             return self.checkImapError(err);
         };
+        const postMessage = {
+            command: 'checkImap',
+            data: {
+                email: this.emailAddress,
+                passwd: this.password
+            },
+            direction: 'CoNET',
+            serial: uuid_generate()
+        };
+        this.postMessage(postMessage, (msg) => {
+            return this.exit(msg.data);
+        });
     }
     checkEmailAddress(email) {
         this.clearError();

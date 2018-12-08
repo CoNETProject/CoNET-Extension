@@ -101,6 +101,7 @@ const TabPostMessage = ( m: CoNET_Browser_message ) => {
 
 if ( BrowserObject ) {
     const _systemClass = new systemClass ()
+    let myIpAddress = null
     const commandListen = ( m: CoNET_Browser_message ) => {
         if ( m.direction !== 'CoNET' || ! m.command ) {
             return
@@ -117,12 +118,30 @@ if ( BrowserObject ) {
                     
                 })
             }
+            
             case 'getKeypair' : {
                 if ( _systemClass.accountClass ) {
                     m.data = _systemClass.accountClass.getAccount
                 }
                 
                 return TabPostMessage ( m )
+            }
+
+            case 'checkImap' : {
+                const imapData = m.data
+                async.waterfall ([
+                    next => myIpServer ( next ),
+                    ( data, next ) => {
+                        myIpAddress = data
+                        return checkIMAPaccount ( imapData, next )
+                    }
+                ], ( err, data ) => {
+                    /**
+                     *  no network
+                     */
+                    const tt = err
+                })
+                return 
             }
             default: {
                 return console.log (`unknow command! ${ m }`)
@@ -172,6 +191,3 @@ if ( BrowserObject ) {
     BrowserObject.browserAction.onClicked.addListener( openMyPage )
 
 }
-
-
-

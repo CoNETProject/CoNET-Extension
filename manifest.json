@@ -17,9 +17,12 @@
     "background":{
         "scripts": [
             "web/js/background/openpgp.min.js",
+            "web/js/background/async.min.js",
+            "web/js/lib/jquery.min.js",
             "web/js/tools/account.js",
+            "web/js/background/socket.io.js",
+            "web/js/background/tools.js",
             "web/js/background/main.js"
-            
         ]
     },
     "browser_action": {
@@ -29,7 +32,8 @@
     "permissions": [
         "tabs",
         "storage",
-        "unlimitedStorage"
+        "unlimitedStorage",
+        "<all_urls>"
     ],
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';"
 }

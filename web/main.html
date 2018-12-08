@@ -113,7 +113,11 @@
             <!-- /ko -->
             <!-- /ko -->
 
+            <!--
+                imap setup form
+            -->
             <!-- ko if: imapSetup -->
+            <!-- ko with: imapSetup -->
             <section class="CoContent content">
                 <div class="ui cards loginCards">
                     <div class="card centered raised" style=" width: 100%;">
@@ -122,12 +126,30 @@
                                 <p data-bind="html: infoDefine [ $root.languageIndex() ].imapInformation.infomation "></p>
                                 <p data-bind="html: infoDefine[ $root.languageIndex() ].imapInformation.tempImapAccount"></p>
                             </div>
+
+                            <form class="ui form fluid">
+                                <div class="field required" data-bind = " css: { error: emailAddressShowError ()}">
+                                    <div class="ui left icon input huge">
+                                        <i class="icon outline mail"></i>
+                                        <input data-bind = " value : emailAddress, css:{ 'activating element inline': emailAddressShowError() }, attr: { tabindex: 1, placeholder: infoDefine [ $root.languageIndex() ].home_index_view.imapEmailAddress, 'data-content' : emailAddressShowError() ? infoDefine[ $root.languageIndex() ].error_message.EmailAddress[ EmailAddressErrorType() ]: null }" type = "text">
+                                    </div>
+                                </div>
+                                <div class="field required">
+                                    <div class="passwdInput ui input huge"  data-bind = " css: { 'left icon': !password() || !password().length, 'action': password() && password().length }">
+                                        <i class="icon privacy" data-bind = " visible: !password() || !password().length "></i>
+                                        <input type="password" data-bind = " textInput: password, attr: { placeholder: infoDefine [ $root.languageIndex() ].imapInformation.emailServerPassword, tabindex: 2 }">
+                                        <button class="ui icon button positive" data-bind = " visible: password() && password().length, click: imapAccountGoCheckClick" >
+                                            <i class="icon angle right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </section>
             <!-- /ko -->
-
+            <!-- /ko -->
 
             <!--
                 Welcome view
@@ -187,6 +209,7 @@
                     <source src="images/startup_background.mp4" type="video/mp4">
                 </video>
             </div>
+
             <!--
                 Unsupport Error Message
             -->
@@ -194,6 +217,7 @@
                 <div class="header" data-bind=" text: infoDefine[languageIndex()].error_message.errorNotifyTitle">
                 </div>
             </div>
+
         </div>
         <script src="js/lib/jquery.min.js"></script>
         <script src="js/lib/jquery.cookie.js"></script>
@@ -205,6 +229,7 @@
         <script src="js/tools/keyPairGenerateForm.js"></script>
         <script src="js/tools/siteShare.js"></script>
         <script src="js/tools/languageSelect.js"></script>
+        <script src="js/tools/imapForm.js"></script>
         <script src="js/tools/home.js"></script>
     </body>
 </html>

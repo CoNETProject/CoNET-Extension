@@ -16,10 +16,12 @@
   },
   "homepage": "https://www.CoNET.com",
   "devDependencies": {
+    "@types/async": "2.0.50",
     "@types/chrome": "^0.0.75",
-    "@types/jquery": "^3.3.22",
+    "@types/jquery": "^3.3.23",
     "@types/jquery.cookie": "^1.4.31",
     "@types/knockout": "^3.4.60",
+    "jquery": "^3.3.1",
     "openpgp": "^4.2.1"
   },
   "dependencies": {}

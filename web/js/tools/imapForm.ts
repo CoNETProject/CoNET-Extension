@@ -131,7 +131,7 @@ class CoNETConnect {
 
 
 
-class imapForm {
+class imapForm extends storageClass {
 	public emailAddress = ko.observable ('')
 	public password = ko.observable ('')
 	public emailAddressShowError = ko.observable ( false )
@@ -190,6 +190,21 @@ class imapForm {
 			removeAllListen ()
 			return self.checkImapError ( err )
 		}
+		const postMessage: CoNET_Browser_message = {
+			command: 'checkImap',
+			data: {
+				email: this.emailAddress,
+				passwd: this.password
+			},
+			direction: 'CoNET',
+			serial: uuid_generate ()
+
+		}
+		
+		this.postMessage ( postMessage, ( msg: CoNET_Browser_message ) => {
+			return this.exit ( msg.data )
+		})
+
 
 	}
 
@@ -204,6 +219,7 @@ class imapForm {
 	}
 
 	constructor ( private account: string, imapData: IinputData, private exit: ( IinputData: IinputData ) => void ) {
+		super()
 		const self = this
 		if ( imapData ) {
 			this.emailAddress ( imapData.imapUserName )
